@@ -461,6 +461,96 @@
         alert('Gagal menyimpan data Guru/Tendik.');
       });
     }
+    // Panggil loadDataSiswa() otomatis saat menu 'siswa' dibuka
+function bukaMenu(namaMenu, element) {
+  const semuaHalaman = document.querySelectorAll('.halaman-section');
+  semuaHalaman.forEach(hal => hal.classList.add('d-none'));
+
+  const halTujuan = document.getElementById('page-' + namaMenu);
+  if (halTujuan) {
+    halTujuan.classList.remove('d-none');
+  }
+
+  const semuaNav = document.querySelectorAll('.nav-menu');
+  semuaNav.forEach(nav => nav.classList.remove('active'));
+  
+  if (element && element.classList.contains('nav-menu')) {
+    element.classList.add('active');
+  }
+
+  // JIKA MENU SISWA DIBUKA, BACA DATA DARI GOOGLE SHEETS
+  if (namaMenu === 'siswa') {
+    loadDataSiswa();
+  }
+}
+
+// BACA DATA SISWA DARI BACKEND
+function loadDataSiswa() {
+  const tbody = document.getElementById('bodyTabelSiswa');
+  tbody.innerHTML = '<tr><td colspan="5" class="text-center"><i class="fa-solid fa-spinner fa-spin me-1"></i> Memuat data dari Google Sheets...</td></tr>';
+
+  fetch(SCRIPT_URL + '?action=getSiswa')
+    .then(res => res.json())
+    .then(res => {
+      if (res.status === 'success') {
+        let html = '';
+        if (res.data.length === 0) {
+          html = '<tr><td colspan="5" class="text-center text-muted">Belum ada data siswa.</td></tr>';
+        } else {
+          res.data.forEach(siswa => {
+            html += `
+              <tr>
+                <td><strong>${siswa.NIS || '-'}</strong><br><small class="text-muted">${siswa.NISN || ''}</small></td>
+                <td>${siswa.Nama_Siswa || '-'}</td>
+                <td><span class="badge ${siswa.L_P === 'L' ? 'bg-info' : 'bg-danger'}">${siswa.L_P || '-'}</span></td>
+                <td>${siswa.Nama_Ortu || '-'}<br><small class="text-muted">${siswa.No_WA_Ortu || ''}</small></td>
+                <td><span class="badge bg-success">${siswa.Status || 'Aktif'}</span></td>
+              </tr>
+            `;
+          });
+        }
+        tbody.innerHTML = html;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Gagal mengambil data siswa. Pastikan URL SCRIPT_URL sudah terpasang.</td></tr>';
+    });
+}
+
+// SIMPAN SISWA & REFRESH TABEL
+function simpanSiswa() {
+  const form = document.getElementById('formSiswa');
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  data.action = 'addSiswa';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(response => {
+    alert('Data siswa berhasil disimpan!');
+    form.reset();
+    loadDataSiswa(); // Refresh tabel otomatis
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Gagal menyimpan data.');
+  });
+}
+
+// PENCARIAN OTOMATIS DI TABEL
+function filterSiswa() {
+  const input = document.getElementById('cariSiswa').value.toLowerCase();
+  const rows = document.querySelectorAll('#bodyTabelSiswa tr');
+  
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(input) ? '' : 'none';
+  });
+}
   </script>
 </body>
 </html>
