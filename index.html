@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIMS - SDN Cikampek Barat II</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .header-logo img { height: 50px; margin: 0 6px; object-fit: contain; }
+    .navbar-custom { background-color: #0d6efd; }
+    .card-custom { border-radius: 10px; border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  </style>
+</head>
+<body>
+
+  <!-- Header Header Logo -->
+  <header class="bg-white py-3 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+      <div class="d-flex align-items-center header-logo">
+        <img src="logo-karawang.jpg" alt="Kabupaten Karawang">
+        <img src="logo-tutwuri.jpg" alt="Tut Wuri Handayani">
+        <img src="disdik.png" alt="Disdikbud Karawang">
+        <img src="logo-sekolah.jpg" alt="SDN Cikampek Barat II">
+      </div>
+      <div class="mt-2 mt-md-0">
+        <h5 class="fw-bold mb-0 text-uppercase text-dark">Sistem Informasi Manajemen Sekolah (SIMS)</h5>
+        <small class="text-muted">SDN Cikampek Barat II - Kecamatan Cikampek</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link active" href="#"><i class="fa-solid fa-gauge me-1"></i> Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-school me-1"></i> Sekolah</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-user-tie me-1"></i> Guru & Tendik</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-graduation-cap me-1"></i> Siswa</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-users-rectangle me-1"></i> Rombel & Ekskul</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-pen-to-square me-1"></i> Nilai</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-clipboard-user me-1"></i> Absensi</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="keuanganDrop" data-bs-toggle="dropdown"><i class="fa-solid fa-wallet me-1"></i> Keuangan</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Infaq</a></li>
+              <li><a class="dropdown-item" href="#">Ekskul</a></li>
+              <li><a class="dropdown-item" href="#">Kas Sekolah</a></li>
+              <li><a class="dropdown-item" href="#">Kas Yayasan</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-file-invoice me-1"></i> Laporan</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <div class="container my-4">
+    <div class="row">
+      <!-- Main Input/Data Form -->
+      <div class="col-lg-8 mb-4">
+        <div class="card card-custom p-4">
+          <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-plus me-2"></i>Tambah Data Siswa Baru</h5>
+          <form id="formSiswa">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">NIS</label>
+                <input type="text" class="form-control" name="nis" required placeholder="Contoh: 10011001">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">NISN</label>
+                <input type="text" class="form-control" name="nisn" required placeholder="Contoh: 101000000054">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Nama Siswa</label>
+                <input type="text" class="form-control" name="nama_siswa" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tempat Lahir</label>
+                <input type="text" class="form-control" name="tempat_lahir">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tanggal Lahir</label>
+                <input type="date" class="form-control" name="tgl_lahir">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Jenis Kelamin</label>
+                <select class="form-select" name="jk">
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Agama</label>
+                <select class="form-select" name="agama">
+                  <option value="Islam">Islam</option>
+                  <option value="Kristen">Kristen</option>
+                  <option value="Katolik">Katolik</option>
+                  <option value="Hindu">Hindu</option>
+                  <option value="Buddha">Buddha</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <button type="button" class="btn btn-primary" onclick="simpanSiswa()"><i class="fa-solid fa-save me-1"></i> Simpan Ke Google Sheets</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Stat Widget Side-bar -->
+      <div class="col-lg-4">
+        <div class="card card-custom p-3 mb-3">
+          <h6 class="fw-bold text-secondary">Ringkasan Statistik</h6>
+          <hr class="my-2">
+          <div class="d-flex justify-content-between align-items-center my-1">
+            <span>Total Siswa:</span>
+            <span class="badge bg-primary fs-6">350</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center my-1">
+            <span>Total Guru & Tendik:</span>
+            <span class="badge bg-success fs-6">18</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center my-1">
+            <span>Rombel Aktif:</span>
+            <span class="badge bg-info text-dark fs-6">12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Bootstrap & Connectivity -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/bundle/min.js"></script>
+  <script>
+    // URL Web App Google Apps Script Anda nanti
+    const SCRIPT_URL = 'GANTI_DENGAN_URL_DEPLOY_GAS_ANDA';
+
+    function simpanSiswa() {
+      const form = document.getElementById('formSiswa');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      data.action = 'addSiswa';
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert('Data berhasil disimpan ke Google Sheets!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Gagal menyimpan data.');
+      });
+    }
+  </script>
+</body>
+</html>
