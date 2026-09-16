@@ -350,7 +350,144 @@
     </div>
 
     <!-- 5. HALAMAN ROMBEL & EKSKUL -->
+    <!-- 5. HALAMAN ROMBEL & EKSKUL (AKTIF) -->
     <div id="page-rombel" class="halaman-section d-none">
+      <!-- Tab Menu Navigasi Sub-Modul -->
+      <ul class="nav nav-tabs mb-4" id="rombelTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active fw-bold" id="tab-rombel-btn" data-bs-toggle="tab" data-bs-target="#sub-rombel" type="button"><i class="fa-solid fa-users-rectangle me-2"></i>Rombongan Belajar (Rombel)</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link fw-bold" id="tab-ekskul-btn" data-bs-toggle="tab" data-bs-target="#sub-ekskul" type="button"><i class="fa-solid fa-futbol me-2"></i>Ekstrakurikuler</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="rombelTabContent">
+        <!-- SUB-TAB 1: ROMBEL -->
+        <div class="tab-pane fade show active" id="sub-rombel" role="tabpanel">
+          <div class="row">
+            <!-- Form Input Rombel -->
+            <div class="col-lg-5 mb-4">
+              <div class="card card-custom p-4">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-plus-circle me-2"></i>Tambah Rombel Baru</h5>
+                <form id="formRombel">
+                  <div class="mb-3">
+                    <label class="form-label">Tingkat Kelas</label>
+                    <select class="form-select" name="tingkat">
+                      <option value="1">Kelas 1</option>
+                      <option value="2">Kelas 2</option>
+                      <option value="3">Kelas 3</option>
+                      <option value="4">Kelas 4</option>
+                      <option value="5">Kelas 5</option>
+                      <option value="6">Kelas 6</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nama Rombel / Kelas</label>
+                    <input type="text" class="form-control" name="nama_rombel" required placeholder="Contoh: 1-A / 4-B / 6-Unggulan">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Tahun Ajaran</label>
+                    <input type="text" class="form-control" name="tahun_ajaran" value="2025/2026">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Wali Kelas</label>
+                    <select class="form-select select-guru" name="id_guru_wali" id="optWaliKelas">
+                      <option value="">-- Pilih Guru Wali Kelas --</option>
+                    </select>
+                  </div>
+                  <button type="button" class="btn btn-primary w-100" onclick="simpanRombel()">
+                    <i class="fa-solid fa-save me-1"></i> Simpan Data Rombel
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Tabel Daftar Rombel -->
+            <div class="col-lg-7 mb-4">
+              <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-list me-2"></i>Daftar Rombel</h5>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="loadDataRombel()">
+                    <i class="fa-solid fa-rotate me-1"></i> Refresh
+                  </button>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover align-middle">
+                    <thead class="table-primary">
+                      <tr>
+                        <th>Rombel</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Wali Kelas</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bodyTabelRombel">
+                      <tr>
+                        <td colspan="3" class="text-center text-muted">Memuat data rombel...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 2: EKSKUL -->
+        <div class="tab-pane fade" id="sub-ekskul" role="tabpanel">
+          <div class="row">
+            <!-- Form Input Ekskul -->
+            <div class="col-lg-5 mb-4">
+              <div class="card card-custom p-4">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-plus-circle me-2"></i>Tambah Ekskul Baru</h5>
+                <form id="formEkskul">
+                  <div class="mb-3">
+                    <label class="form-label">Nama Ekstrakurikuler</label>
+                    <input type="text" class="form-control" name="nama_ekskul" required placeholder="Contoh: Pramuka, Dokter Kecil, Karate">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Pembina / Pelatih</label>
+                    <select class="form-select select-guru" name="id_guru_pembina" id="optPembinaEkskul">
+                      <option value="">-- Pilih Pembina Ekskul --</option>
+                    </select>
+                  </div>
+                  <button type="button" class="btn btn-success w-100" onclick="simpanEkskul()">
+                    <i class="fa-solid fa-save me-1"></i> Simpan Data Ekskul
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Tabel Daftar Ekskul -->
+            <div class="col-lg-7 mb-4">
+              <div class="card card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="fw-bold text-primary mb-0"><i class="fa-solid fa-list me-2"></i>Daftar Ekstrakurikuler</h5>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="loadDataEkskul()">
+                    <i class="fa-solid fa-rotate me-1"></i> Refresh
+                  </button>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover align-middle">
+                    <thead class="table-success">
+                      <tr>
+                        <th>Nama Ekskul</th>
+                        <th>Pembina</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bodyTabelEkskul">
+                      <tr>
+                        <td colspan="2" class="text-center text-muted">Memuat data ekskul...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="card card-custom p-4">
         <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-users-rectangle me-2"></i>Rombongan Belajar & Ekstrakurikuler</h5>
         <p class="text-muted">Pengaturan pembagian kelas dan pembina ekskul.</p>
@@ -550,6 +687,109 @@ function filterSiswa() {
     const text = row.textContent.toLowerCase();
     row.style.display = text.includes(input) ? '' : 'none';
   });
+}
+    // Panggil otomasi data saat menu 'rombel' diakses
+function bukaMenu(namaMenu, element) {
+  const semuaHalaman = document.querySelectorAll('.halaman-section');
+  semuaHalaman.forEach(hal => hal.classList.add('d-none'));
+
+  const halTujuan = document.getElementById('page-' + namaMenu);
+  if (halTujuan) {
+    halTujuan.classList.remove('d-none');
+  }
+
+  const semuaNav = document.querySelectorAll('.nav-menu');
+  semuaNav.forEach(nav => nav.classList.remove('active'));
+  
+  if (element && element.classList.contains('nav-menu')) {
+    element.classList.add('active');
+  }
+
+  // LOGIKA PANGGILAN OTOMATIS
+  if (namaMenu === 'siswa') {
+    loadDataSiswa();
+  } else if (namaMenu === 'rombel') {
+    loadOptionsGuru(); // Load daftar guru untuk dropdown Wali Kelas & Pembina
+    loadDataRombel();
+    loadDataEkskul();
+  }
+}
+
+// BACA DATA GURU UNTUK DROPDOWN
+function loadOptionsGuru() {
+  fetch(SCRIPT_URL + '?action=getGuru')
+    .then(res => res.json())
+    .then(res => {
+      if (res.status === 'success') {
+        let options = '<option value="">-- Pilih Guru --</option>';
+        res.data.forEach(guru => {
+          options += `<option value="${guru.Nama_Lengkap}">${guru.Nama_Lengkap} (${guru.Jabatan})</option>`;
+        });
+        document.getElementById('optWaliKelas').innerHTML = options;
+        document.getElementById('optPembinaEkskul').innerHTML = options;
+      }
+    })
+    .catch(err => console.error(err));
+}
+
+// BACA & SIMPAN ROMBEL
+function loadDataRombel() {
+  const tbody = document.getElementById('bodyTabelRombel');
+  tbody.innerHTML = '<tr><td colspan="3" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Memuat...</td></tr>';
+  fetch(SCRIPT_URL + '?action=getRombel')
+    .then(res => res.json())
+    .then(res => {
+      let html = '';
+      if (res.data && res.data.length > 0) {
+        res.data.forEach(r => {
+          html += `<tr><td><strong>${r.Nama_Rombel}</strong></td><td>${r.Tahun_Ajaran}</td><td>${r.ID_Guru_Wali || '-'}</td></tr>`;
+        });
+      } else {
+        html = '<tr><td colspan="3" class="text-center text-muted">Belum ada Rombel.</td></tr>';
+      }
+      tbody.innerHTML = html;
+    });
+}
+
+function simpanRombel() {
+  const form = document.getElementById('formRombel');
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  data.action = 'addRombel';
+
+  fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+    .then(res => res.json())
+    .then(() => { alert('Rombel berhasil dibuat!'); form.reset(); loadDataRombel(); });
+}
+
+// BACA & SIMPAN EKSKUL
+function loadDataEkskul() {
+  const tbody = document.getElementById('bodyTabelEkskul');
+  tbody.innerHTML = '<tr><td colspan="2" class="text-center"><i class="fa-solid fa-spinner fa-spin"></i> Memuat...</td></tr>';
+  fetch(SCRIPT_URL + '?action=getEkskul')
+    .then(res => res.json())
+    .then(res => {
+      let html = '';
+      if (res.data && res.data.length > 0) {
+        res.data.forEach(e => {
+          html += `<tr><td><strong>${e.Nama_Ekskul}</strong></td><td>${e.ID_Guru_Pembina || '-'}</td></tr>`;
+        });
+      } else {
+        html = '<tr><td colspan="2" class="text-center text-muted">Belum ada Ekskul.</td></tr>';
+      }
+      tbody.innerHTML = html;
+    });
+}
+
+function simpanEkskul() {
+  const form = document.getElementById('formEkskul');
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  data.action = 'addEkskul';
+
+  fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+    .then(res => res.json())
+    .then(() => { alert('Ekskul berhasil ditambahkan!'); form.reset(); loadDataEkskul(); });
 }
   </script>
 </body>
