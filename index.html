@@ -13,11 +13,12 @@
     .header-logo img { height: 50px; margin: 0 6px; object-fit: contain; }
     .navbar-custom { background-color: #0d6efd; }
     .card-custom { border-radius: 10px; border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .nav-link { cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- Header Header Logo -->
+  <!-- Header Logo & Judul -->
   <header class="bg-white py-3 border-bottom">
     <div class="container d-flex flex-wrap justify-content-between align-items-center">
       <div class="d-flex align-items-center header-logo">
@@ -26,7 +27,7 @@
         <img src="disdik.png" alt="Disdikbud Karawang">
         <img src="logo-sekolah.png" alt="SDN Cikampek Barat II">
       </div>
-      <div class="mt-2 mt-md-0">
+      <div class="mt-2 mt-md-0 text-md-end">
         <h5 class="fw-bold mb-0 text-uppercase text-dark">Sistem Informasi Manajemen Sekolah (SIMS)</h5>
         <small class="text-muted">SDN Cikampek Barat II - Kecamatan Cikampek</small>
       </div>
@@ -41,110 +42,244 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link active" href="#"><i class="fa-solid fa-gauge me-1"></i> Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-school me-1"></i> Sekolah</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-user-tie me-1"></i> Guru & Tendik</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-graduation-cap me-1"></i> Siswa</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-users-rectangle me-1"></i> Rombel & Ekskul</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-pen-to-square me-1"></i> Nilai</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-clipboard-user me-1"></i> Absensi</a></li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu active" onclick="bukaMenu('dashboard', this)"><i class="fa-solid fa-gauge me-1"></i> Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('sekolah', this)"><i class="fa-solid fa-school me-1"></i> Sekolah</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('guru', this)"><i class="fa-solid fa-user-tie me-1"></i> Guru & Tendik</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('siswa', this)"><i class="fa-solid fa-graduation-cap me-1"></i> Siswa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('rombel', this)"><i class="fa-solid fa-users-rectangle me-1"></i> Rombel & Ekskul</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('nilai', this)"><i class="fa-solid fa-pen-to-square me-1"></i> Nilai</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('absensi', this)"><i class="fa-solid fa-clipboard-user me-1"></i> Absensi</a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="keuanganDrop" data-bs-toggle="dropdown"><i class="fa-solid fa-wallet me-1"></i> Keuangan</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Infaq</a></li>
-              <li><a class="dropdown-item" href="#">Ekskul</a></li>
-              <li><a class="dropdown-item" href="#">Kas Sekolah</a></li>
-              <li><a class="dropdown-item" href="#">Kas Yayasan</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0)" onclick="bukaMenu('keuangan', this)">Ringkasan Keuangan</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-file-invoice me-1"></i> Laporan</a></li>
+          <li class="nav-item">
+            <a class="nav-link nav-menu" onclick="bukaMenu('laporan', this)"><i class="fa-solid fa-file-invoice me-1"></i> Laporan</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content Container -->
+  <!-- Container Konten Utama -->
   <div class="container my-4">
-    <div class="row">
-      <!-- Main Input/Data Form -->
-      <div class="col-lg-8 mb-4">
-        <div class="card card-custom p-4">
-          <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-plus me-2"></i>Tambah Data Siswa Baru</h5>
-          <form id="formSiswa">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">NIS</label>
-                <input type="text" class="form-control" name="nis" required placeholder="Contoh: 10011001">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">NISN</label>
-                <input type="text" class="form-control" name="nisn" required placeholder="Contoh: 101000000054">
-              </div>
-              <div class="col-12">
-                <label class="form-label">Nama Siswa</label>
-                <input type="text" class="form-control" name="nama_siswa" required>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Tempat Lahir</label>
-                <input type="text" class="form-control" name="tempat_lahir">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Tanggal Lahir</label>
-                <input type="date" class="form-control" name="tgl_lahir">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Jenis Kelamin</label>
-                <select class="form-select" name="jk">
-                  <option value="L">Laki-laki</option>
-                  <option value="P">Perempuan</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Agama</label>
-                <select class="form-select" name="agama">
-                  <option value="Islam">Islam</option>
-                  <option value="Kristen">Kristen</option>
-                  <option value="Katolik">Katolik</option>
-                  <option value="Hindu">Hindu</option>
-                  <option value="Buddha">Buddha</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <button type="button" class="btn btn-primary" onclick="simpanSiswa()"><i class="fa-solid fa-save me-1"></i> Simpan Ke Google Sheets</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
 
-      <!-- Stat Widget Side-bar -->
-      <div class="col-lg-4">
-        <div class="card card-custom p-3 mb-3">
-          <h6 class="fw-bold text-secondary">Ringkasan Statistik</h6>
-          <hr class="my-2">
-          <div class="d-flex justify-content-between align-items-center my-1">
-            <span>Total Siswa:</span>
-            <span class="badge bg-primary fs-6">350</span>
+    <!-- 1. HALAMAN DASHBOARD -->
+    <div id="page-dashboard" class="halaman-section">
+      <div class="row">
+        <!-- Form Tambah Siswa -->
+        <div class="col-lg-8 mb-4">
+          <div class="card card-custom p-4">
+            <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-plus me-2"></i>Tambah Data Siswa Baru</h5>
+            <form id="formSiswa">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">NIS</label>
+                  <input type="text" class="form-control" name="nis" required placeholder="Contoh: 10011001">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">NISN</label>
+                  <input type="text" class="form-control" name="nisn" required placeholder="Contoh: 101000000054">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Nama Siswa</label>
+                  <input type="text" class="form-control" name="nama_siswa" required placeholder="Nama Lengkap Siswa">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Tempat Lahir</label>
+                  <input type="text" class="form-control" name="tempat_lahir">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Tanggal Lahir</label>
+                  <input type="date" class="form-control" name="tgl_lahir">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Jenis Kelamin</label>
+                  <select class="form-select" name="jk">
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Agama</label>
+                  <select class="form-select" name="agama">
+                    <option value="Islam">Islam</option>
+                    <option value="Kristen">Kristen</option>
+                    <option value="Katolik">Katolik</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Buddha">Buddha</option>
+                  </select>
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="button" class="btn btn-primary" onclick="simpanSiswa()"><i class="fa-solid fa-save me-1"></i> Simpan Ke Google Sheets</button>
+                </div>
+              </div>
+            </form>
           </div>
-          <div class="d-flex justify-content-between align-items-center my-1">
-            <span>Total Guru & Tendik:</span>
-            <span class="badge bg-success fs-6">18</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center my-1">
-            <span>Rombel Aktif:</span>
-            <span class="badge bg-info text-dark fs-6">12</span>
+        </div>
+
+        <!-- Sidebar Ringkasan Info -->
+        <div class="col-lg-4">
+          <div class="card card-custom p-3 mb-3">
+            <h6 class="fw-bold text-secondary">Ringkasan Sekolah</h6>
+            <hr class="my-2">
+            <div class="d-flex justify-content-between align-items-center my-2">
+              <span>Total Siswa:</span>
+              <span class="badge bg-primary fs-6">350</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-2">
+              <span>Guru & Tendik:</span>
+              <span class="badge bg-success fs-6">18</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-2">
+              <span>Rombel Aktif:</span>
+              <span class="badge bg-info text-dark fs-6">12</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 2. HALAMAN SEKOLAH -->
+    <div id="page-sekolah" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-school me-2"></i>Profil Sekolah</h5>
+        <form id="formSekolah">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">NPSN</label>
+              <input type="text" class="form-control" name="npsn" value="20211000">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nama Sekolah</label>
+              <input type="text" class="form-control" name="nama_sekolah" value="SDN Cikampek Barat II">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Alamat Sekolah</label>
+              <textarea class="form-control" name="alamat" rows="2">Kecamatan Cikampek, Kabupaten Karawang</textarea>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Akreditasi</label>
+              <input type="text" class="form-control" name="akreditasi" value="A">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Tahun Ajaran Aktif</label>
+              <input type="text" class="form-control" name="tahun_ajaran" value="2025/2026">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Semester Aktif</label>
+              <select class="form-select" name="semester">
+                <option value="Ganjil">Ganjil</option>
+                <option value="Genap">Genap</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. HALAMAN GURU & TENDIK -->
+    <div id="page-guru" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-tie me-2"></i>Data Guru & Tenaga Kependidikan</h5>
+        <p class="text-muted">Fitur manajemen data Guru & Tendik siap dikembangkan.</p>
+      </div>
+    </div>
+
+    <!-- 4. HALAMAN SISWA -->
+    <div id="page-siswa" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-graduation-cap me-2"></i>Daftar Siswa</h5>
+        <p class="text-muted">Daftar tabel seluruh data siswa akan ditampilkan di sini.</p>
+      </div>
+    </div>
+
+    <!-- 5. HALAMAN ROMBEL & EKSKUL -->
+    <div id="page-rombel" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-users-rectangle me-2"></i>Rombongan Belajar & Ekstrakurikuler</h5>
+        <p class="text-muted">Pengaturan pembagian kelas dan pembina ekskul.</p>
+      </div>
+    </div>
+
+    <!-- 6. HALAMAN NILAI -->
+    <div id="page-nilai" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Data Nilai Murid</h5>
+        <p class="text-muted">Input nilai formatif, sumatif, serta cetak rapor.</p>
+      </div>
+    </div>
+
+    <!-- 7. HALAMAN ABSENSI -->
+    <div id="page-absensi" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-clipboard-user me-2"></i>Absensi Kehadiran Murid</h5>
+        <p class="text-muted">Pencatatan rekapitulasi kehadiran harian/bulanan siswa.</p>
+      </div>
+    </div>
+
+    <!-- 8. HALAMAN KEUANGAN -->
+    <div id="page-keuangan" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-wallet me-2"></i>Manajemen Keuangan</h5>
+        <p class="text-muted">Pencatatan dana Infaq, Ekskul, Kas Sekolah, dan Kas Yayasan.</p>
+      </div>
+    </div>
+
+    <!-- 9. HALAMAN LAPORAN -->
+    <div id="page-laporan" class="halaman-section d-none">
+      <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-file-invoice me-2"></i>Laporan Ringkasan</h5>
+        <p class="text-muted">Cetak rekapitulasi data dan ekspor laporan ke PDF/Excel.</p>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Script Bootstrap & Connectivity -->
+  <!-- JavaScript Dependencies -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/bundle/min.js"></script>
   <script>
-    // URL Web App Google Apps Script Anda nanti
+    // URL Web App Google Apps Script Anda (Ganti dengan URL hasil deploy Apps Script)
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5g4FcjOQ1LCIQXzEJPb3fsAjQpX44dv-DI2wLgJyi9gs4aLD0x-gnE2NC2LDUuFjl8w/exec';
 
+    // FUNGSI PERPINDAHAN MENU (ROUTING)
+    function bukaMenu(namaMenu, element) {
+      // 1. Sembunyikan seluruh section halaman
+      const semuaHalaman = document.querySelectorAll('.halaman-section');
+      semuaHalaman.forEach(hal => hal.classList.add('d-none'));
+
+      // 2. Tampilkan halaman yang dituju
+      const halTujuan = document.getElementById('page-' + namaMenu);
+      if (halTujuan) {
+        halTujuan.classList.remove('d-none');
+      }
+
+      // 3. Update status warna tombol aktif di Navbar
+      const semuaNav = document.querySelectorAll('.nav-menu');
+      semuaNav.forEach(nav => nav.classList.remove('active'));
+      
+      if (element && element.classList.contains('nav-menu')) {
+        element.classList.add('active');
+      }
+    }
+
+    // FUNGSI SIMPAN DATA SISWA KE GOOGLE SHEETS
     function simpanSiswa() {
       const form = document.getElementById('formSiswa');
       const formData = new FormData(form);
@@ -157,7 +292,7 @@
       })
       .then(res => res.json())
       .then(response => {
-        alert('Data berhasil disimpan ke Google Sheets!');
+        alert('Data siswa berhasil disimpan ke Google Sheets!');
         form.reset();
       })
       .catch(error => {
