@@ -194,11 +194,55 @@
       </div>
     </div>
 
-    <!-- 3. HALAMAN GURU & TENDIK -->
+    <!-- 3. HALAMAN GURU & TENDIK (AKTIF) -->
     <div id="page-guru" class="halaman-section d-none">
       <div class="card card-custom p-4">
-        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-tie me-2"></i>Data Guru & Tenaga Kependidikan</h5>
-        <p class="text-muted">Fitur manajemen data Guru & Tendik siap dikembangkan.</p>
+        <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-user-tie me-2"></i>Tambah Data Guru & Tendik</h5>
+        <form id="formGuru">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">NUPTK</label>
+              <input type="text" class="form-control" name="nuptk" placeholder="Isi '-' jika belum ada">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">NIK</label>
+              <input type="text" class="form-control" name="nik" required placeholder="Nomor Induk Kependudukan">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nama Lengkap & Gelar</label>
+              <input type="text" class="form-control" name="nama_lengkap" required placeholder="Contoh: Ahmad S.Pd.">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Jabatan</label>
+              <select class="form-select" name="jabatan">
+                <option value="Guru Kelas">Guru Kelas</option>
+                <option value="Guru PJOK">Guru PJOK</option>
+                <option value="Guru Agama">Guru Agama</option>
+                <option value="Guru Bahasa Inggris">Guru Bahasa Inggris</option>
+                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                <option value="Operator Sekolah">Operator Sekolah</option>
+                <option value="Tenaga Perpustakaan">Tenaga Perpustakaan</option>
+                <option value="Penjaga Sekolah">Penjaga Sekolah</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Status Kepegawaian</label>
+              <select class="form-select" name="status_kepegawaian">
+                <option value="PNS">PNS</option>
+                <option value="PPPK">PPPK</option>
+                <option value="GTY/PTY">GTY/PTY</option>
+                <option value="GTT/PTT">GTT/PTT</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">No. WhatsApp</label>
+              <input type="text" class="form-control" name="no_wa" placeholder="Contoh: 08123456789">
+            </div>
+            <div class="col-12 mt-4">
+              <button type="button" class="btn btn-success" onclick="simpanGuru()"><i class="fa-solid fa-save me-1"></i> Simpan Data Guru & Tendik</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -298,6 +342,28 @@
       .catch(error => {
         console.error('Error:', error);
         alert('Gagal menyimpan data.');
+      });
+    }
+
+    // FUNGSI SIMPAN DATA GURU & TENDIK KE GOOGLE SHEETS
+    function simpanGuru() {
+      const form = document.getElementById('formGuru');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      data.action = 'addGuru';
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert('Data Guru & Tendik berhasil disimpan!');
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Gagal menyimpan data Guru/Tendik.');
       });
     }
   </script>
